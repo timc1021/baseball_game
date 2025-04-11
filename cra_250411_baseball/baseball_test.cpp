@@ -32,6 +32,14 @@ TEST_F(BaseballFixture, solved) {
 	EXPECT_EQ(result.balls, 0);
 }
 
+TEST_F(BaseballFixture, strike2ball0) {
+	GuessResult result = game.guess("153");
+
+	EXPECT_FALSE(result.solved);
+	EXPECT_EQ(result.strikes, 2);
+	EXPECT_EQ(result.balls, 0);
+}
+
 int main() {
 	::testing::InitGoogleTest();
 	return RUN_ALL_TESTS();
