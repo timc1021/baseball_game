@@ -1,13 +1,11 @@
 #include <gmock/gmock.h>
 #include "baseball.cpp"
-#include "iostream"
-#include "stdexcept"
 
 using namespace std;
 
 class BaseballFixture : public testing::Test {
 public:
-	Baseball game;
+	Baseball game{ "123" };
 
 	void assertIllegalArgument(string guessNumber) {
 		try {
@@ -24,6 +22,14 @@ TEST_F(BaseballFixture, ThrowException) {
 	assertIllegalArgument("12");
 	assertIllegalArgument("12s");
 	assertIllegalArgument("121");
+}
+
+TEST_F(BaseballFixture, solved) {
+	GuessResult result = game.guess("123");
+
+	EXPECT_TRUE(result.solved);
+	EXPECT_EQ(result.strikes, 3);
+	EXPECT_EQ(result.balls, 0);
 }
 
 int main() {
