@@ -26,6 +26,13 @@ public:
 			if (guessNumber[i] == question[i]) {
 				result.strikes++;
 			}
+			else {
+				for (int j = 0; j < 3; j++) {
+					if (guessNumber[i] == question[j]) {
+						result.balls++;
+					}
+				}
+			}
 		}
 
 		return result;
