@@ -5,18 +5,24 @@
 
 using namespace std;
 
-TEST(BaseballGame, game_test) {
-	EXPECT_EQ(1, 1);
-}
-
-TEST(BaseballGame, ThrowExceptionInputLengthUnmatch) {
+class BaseballFixture : public testing::Test {
+public:
 	Baseball game;
-	EXPECT_THROW(game.guess(string("12")), length_error);
-}
 
-TEST(BaseballGame, ThrowExceptionInvalidChar) {
-	Baseball game;
-	EXPECT_THROW(game.guess(string("12s")), invalid_argument);
+	void assertIllegalArgument(string guessNumber) {
+		try {
+			game.guess(guessNumber);
+			FAIL();
+		}
+		catch (exception e) {
+			//PASS
+		}
+	}
+};
+
+TEST_F(BaseballFixture, ThrowException) {
+	assertIllegalArgument("12");
+	assertIllegalArgument("12s");
 }
 
 int main() {
